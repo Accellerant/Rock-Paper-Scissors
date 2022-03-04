@@ -7,7 +7,9 @@ Required function/variables/parameters/etc. names:
         playerSelection, computerSelection
 
 
+*/
 
+/*
     Pseudocode:
         Three Game Variables for Rock, Paper, Scissors
         Two Variables for User and CPU: Score and Choice
