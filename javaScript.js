@@ -44,3 +44,15 @@
     #Program Ends
 */
 
+
+const moves = ["rock", "paper", "scissors"];
+let userChoice,
+    userScore = 0,
+
+    cpuChoice,
+    cpuScore = 0;
+
+    
+for (let a = 0; a < 5; a++) {
+    
+}
