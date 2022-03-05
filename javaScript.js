@@ -70,27 +70,21 @@ Compare it to the rest of the moves available to be sure
 it's a valid option.
 */
 function playerChoice() {
-    
-    //Get input, then make it lowercase
-    let userChoice = prompt("Rock, Paper, or Scissors?\n");
 
-    // Compare it to all three 
-    for(let a = 0; a < 3; a++) {
-        console.log("userChoice: " + userChoice);
-        console.log("Current Word Comparison: " + moves[a]);
-        if (userChoice == moves[a]) {
-            console.log("Choice " + userChoice + " valid!");
+    // Loop until a valid choice is entered.
+    while(true) {
+        //Get input, convert to string, lowercase.
+        let userChoice = String( prompt("Rock, Paper, or Scissors?\n") ).toLowerCase();
+
+        //See if userChoice is a valid move choice.
+        if (moves.indexOf(userChoice) != -1) 
             return userChoice;
-        } else {
-            console.log("ERROR! Input either \"Rock,\" \"Paper,\" or \"Scissors.\"");
-            playerChoice();
-        }
-
             
+        alert("ERROR! Input either \"Rock,\" \"Paper,\" or \"Scissors.\"");    
     }
 
 }
 
 for (let a = 0; a < 5; a++) {
-    playerChoice();
+    userChoice = playerChoice();
 }
