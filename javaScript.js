@@ -59,5 +59,38 @@ function computerPlay(){
     cpuChoice = moves[ Math.floor(Math.random() * 3) ];
 }
 
+//Play the actual game
+function game(playerSelection, computerSelection){
 
+}
 
+/*
+Have the user select their move. 
+Compare it to the rest of the moves available to be sure
+it's a valid option.
+*/
+function playerChoice() {
+    
+    //Get input, then make it lowercase
+    let userChoice = prompt("Rock, Paper, or Scissors?\n");
+
+    // Compare it to all three 
+    for(let a = 0; a < 3; a++) {
+        console.log("userChoice: " + userChoice);
+        console.log("Current Word Comparison: " + moves[a]);
+        if (userChoice == moves[a]) {
+            console.log("Choice " + userChoice + " valid!");
+            return userChoice;
+        } else {
+            console.log("ERROR! Input either \"Rock,\" \"Paper,\" or \"Scissors.\"");
+            playerChoice();
+        }
+
+            
+    }
+
+}
+
+for (let a = 0; a < 5; a++) {
+    playerChoice();
+}
