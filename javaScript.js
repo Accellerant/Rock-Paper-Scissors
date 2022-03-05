@@ -52,7 +52,12 @@ let userChoice,
     cpuChoice,
     cpuScore = 0;
 
+//CPU choses one of the available moves
+function computerPlay(){
     
-for (let a = 0; a < 5; a++) {
-    
+    // The index chosen will be from 0 - 2
+    cpuChoice = moves[ Math.floor(Math.random() * 3) ];
 }
+
+
+
