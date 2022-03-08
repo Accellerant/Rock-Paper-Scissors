@@ -52,21 +52,22 @@ function computerPlay(){
     return moves[ Math.floor(Math.random() * 3) ];
 }
 
-//Compare each selection to see who wins. 
+//Play a single round of Rock-Paper-Scissors
 function playRound(playerSelection, computerSelection){
 
-    let selectionsShow = 
-        `CPU picked ${computerSelection},\nYou picked ${playerSelection}.`;
+    let msgSelections = 
+        `CPU picked ${computerSelection},\nYou picked ${playerSelection}.`,
     
-    let cpuWon = "The Computer won this round!",
-        playerWon = "You won this round!",
-        draw = "DRAW: You both have the same move.";
+        msgCpuWon = "The Computer won this round!",
+        msgPlayerWon = "You won this round!",
+        msgDraw = "DRAW: You both have the same move.";
 
-    alert(selectionsShow);
+
+    alert(msgSelections);
 
     // If both selections are the same
     if (computerSelection === playerSelection) {
-        return draw;
+        return msgDraw;
 
     // If any of the win conditions for CPU are found, they win.
     } else if ((computerSelection == 'rock' && playerSelection == 'scissors') || 
@@ -74,12 +75,12 @@ function playRound(playerSelection, computerSelection){
                 (computerSelection == 'scissors' && playerSelection ==='paper')) {
 
         cpuScore++;
-        return cpuWon;
+        return msgCpuWon;
         
     // Otherwise, the player scored. 
     } else {
         userScore++;
-        return playerWon;
+        return msgPlayerWon;
     }   
 }
 
@@ -101,6 +102,10 @@ function playerChoice() {
             
         alert("ERROR! Input either \"Rock,\" \"Paper,\" or \"Scissors.\"");    
     }
+
+}
+
+function game(){
 
 }
 
