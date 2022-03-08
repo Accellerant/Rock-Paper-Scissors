@@ -45,23 +45,42 @@
 */
 
 
-const moves = ["rock", "paper", "scissors"];
-let userChoice,
-    userScore = 0,
-
-    cpuChoice,
-    cpuScore = 0;
-
 //CPU choses one of the available moves
 function computerPlay(){
     
     // The index chosen will be from 0 - 2
-    cpuChoice = moves[ Math.floor(Math.random() * 3) ];
+    return moves[ Math.floor(Math.random() * 3) ];
 }
 
-//Play the actual game
-function game(playerSelection, computerSelection){
+//Compare each selection to see who wins. 
+function playRound(playerSelection, computerSelection){
 
+    let selectionsShow = 
+        `CPU picked ${computerSelection},\nYou picked ${playerSelection}.`;
+    
+    let cpuWon = "The Computer won this round!",
+        playerWon = "You won this round!",
+        draw = "DRAW: You both have the same move.";
+
+    alert(selectionsShow);
+
+    // If both selections are the same
+    if (computerSelection === playerSelection) {
+        return draw;
+
+    // If any of the win conditions for CPU are found, they win.
+    } else if ((computerSelection == 'rock' && playerSelection == 'scissors') || 
+                (computerSelection == 'paper' && playerSelection == 'rock') ||
+                (computerSelection == 'scissors' && playerSelection ==='paper')) {
+
+        cpuScore++;
+        return cpuWon;
+        
+    // Otherwise, the player scored. 
+    } else {
+        userScore++;
+        return playerWon;
+    }   
 }
 
 /*
@@ -85,6 +104,21 @@ function playerChoice() {
 
 }
 
+
+// The main program,
+const moves = ["rock", "paper", "scissors"];
+let userChoice,
+    userScore = 0,
+
+    cpuChoice,
+    cpuScore = 0;
+
+// Will place in its own function, game() soon.
 for (let a = 0; a < 5; a++) {
+    cpuChoice = computerPlay();
     userChoice = playerChoice();
+
+    console.log(playRound(userChoice, cpuChoice));
 }
+
+console.log(`Scores\nCPU: ${cpuScore}\nUser: ${userScore}`);
