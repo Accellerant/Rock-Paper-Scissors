@@ -63,7 +63,7 @@ function playRound(playerSelection, computerSelection){
         msgDraw = "DRAW: You both have the same move.";
 
 
-    alert(msgSelections);
+    console.log(msgSelections);
 
     // If both selections are the same
     if (computerSelection === playerSelection) {
@@ -100,7 +100,7 @@ function playerChoice() {
         if (moves.indexOf(userChoice) != -1) 
             return userChoice;
             
-        alert("ERROR! Input either \"Rock,\" \"Paper,\" or \"Scissors.\"");    
+        console.log("ERROR! Input either \"Rock,\" \"Paper,\" or \"Scissors.\"");    
     }
 
 }
