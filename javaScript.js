@@ -107,9 +107,12 @@ function playerChoice() {
 
 // Play Rock-Paper-Scissors for 5 times before finding a winner. 
 function game(){
+
+    let userScore = 0, cpuScore = 0;
+
     for (let a = 0; a < 5; a++) {
-        cpuChoice = computerPlay();
-        userChoice = playerChoice();
+        let cpuChoice = computerPlay(), 
+            userChoice = playerChoice();
     
         playRound(userChoice, cpuChoice);
     }
@@ -118,10 +121,5 @@ function game(){
 
 // The main program,
 const moves = ["rock", "paper", "scissors"];
-let userChoice,
-    userScore = 0,
 
-    cpuChoice,
-    cpuScore = 0;
-
-    game();
+game();
