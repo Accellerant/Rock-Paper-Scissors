@@ -105,8 +105,14 @@ function playerChoice() {
 
 }
 
+// Play Rock-Paper-Scissors for 5 times before finding a winner. 
 function game(){
-
+    for (let a = 0; a < 5; a++) {
+        cpuChoice = computerPlay();
+        userChoice = playerChoice();
+    
+        playRound(userChoice, cpuChoice);
+    }
 }
 
 
@@ -118,12 +124,4 @@ let userChoice,
     cpuChoice,
     cpuScore = 0;
 
-// Will place in its own function, game() soon.
-for (let a = 0; a < 5; a++) {
-    cpuChoice = computerPlay();
-    userChoice = playerChoice();
-
-    console.log(playRound(userChoice, cpuChoice));
-}
-
-console.log(`Scores\nCPU: ${cpuScore}\nUser: ${userScore}`);
+    game();
