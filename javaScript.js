@@ -99,7 +99,7 @@ function playerChoice() {
         //Get input, convert to string, lowercase.
         let userChoice = String( prompt("Rock, Paper, or Scissors?\n") ).toLowerCase();
 
-        //See if userChoice is a valid move choice.
+        //See if userChoice is a valid move[] choice.
         if (moves.indexOf(userChoice) != -1) 
             return userChoice;
             
@@ -131,9 +131,28 @@ function game(){
         //Update the player to current scores.
         console.log(` -- Current Score -- \nCPU: ${cpuScore}\nPlayer: ${userScore}`);
     }
+
+    findWinner(userScore, cpuScore);
 }
 
-// The main program,
+//Print who won the game.
+function findWinner(userScore, cpuScore){
+
+    let msgUserWin = `You win!`,
+        msgCpuWin = `You Lose.`,
+        msgDraw = `DRAW - Nobody Won!`;
+
+    //If the player won
+    (userScore > cpuScore) ? console.log(msgUserWin) : 
+    //If the CPU won
+    (cpuScore > userScore) ? console.log(msgCpuWin) :
+    // Otherwise, it must be a draw.
+    console.log(msgDraw);
+
+}
+
+//Main Program
+//Utilized by computerPlay() and playerChoice()
 const moves = ["rock", "paper", "scissors"];
 
 game();
