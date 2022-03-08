@@ -58,8 +58,10 @@ function playRound(playerSelection, computerSelection){
     let msgSelections = 
         `CPU picked ${computerSelection},\nYou picked ${playerSelection}.`,
     
-        msgCpuWon = "The Computer won this round!",
-        msgPlayerWon = "You won this round!",
+        msgCpuWon = 
+            `You lose this round, ${computerSelection} beats ${playerSelection}!`,
+        msgPlayerWon = 
+            `You win this round, ${playerSelection} beats ${computerSelection}!`,
         msgDraw = "DRAW: You both have the same move.";
 
 
@@ -74,12 +76,10 @@ function playRound(playerSelection, computerSelection){
                 (computerSelection == 'paper' && playerSelection == 'rock') ||
                 (computerSelection == 'scissors' && playerSelection ==='paper')) {
 
-        cpuScore++;
         return msgCpuWon;
         
     // Otherwise, the player scored. 
     } else {
-        userScore++;
         return msgPlayerWon;
     }   
 }
@@ -108,14 +108,18 @@ function playerChoice() {
 // Play Rock-Paper-Scissors for 5 times before finding a winner. 
 function game(){
 
-    let userScore = 0, cpuScore = 0;
+    let userScore = 0, cpuScore = 0, findWinner = "";
 
     for (let a = 0; a < 5; a++) {
         let cpuChoice = computerPlay(), 
             userChoice = playerChoice();
     
-        playRound(userChoice, cpuChoice);
+        console.log(findWinner = playRound(userChoice, cpuChoice));
     }
+}
+
+function updateScores(userScore, cpuScore, findWinner){
+
 }
 
 
