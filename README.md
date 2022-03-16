@@ -13,3 +13,9 @@ Goals:
     display what's going on. 
 
     This code will be reused for adding a UI to it later.
+
+
+#UI-Update    3/16/2022
+    Add a simple UI to interact with the game instead of
+    inputting selections via user input. The score will
+    also be shown, as well as what each side plays.

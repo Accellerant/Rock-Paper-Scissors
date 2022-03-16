@@ -108,6 +108,8 @@ function playerChoice() {
 
 }
 
+
+/*
 // Play Rock-Paper-Scissors for 5 times before finding a winner. 
 function game(){
 
@@ -134,6 +136,8 @@ function game(){
 
     findWinner(userScore, cpuScore);
 }
+*/
+
 
 //Print who won the game.
 function findWinner(userScore, cpuScore){
@@ -154,5 +158,9 @@ function findWinner(userScore, cpuScore){
 //Main Program
 //Utilized by computerPlay() and playerChoice()
 const moves = ["rock", "paper", "scissors"];
+
+
+
+
 
 game();
