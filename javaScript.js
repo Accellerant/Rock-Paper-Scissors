@@ -92,28 +92,37 @@ function playRound(playerSelection, computerSelection){
 // Play Rock-Paper-Scissors for 5 times before finding a winner. 
 function game(){
 
-    let userScore = 0, cpuScore = 0, results = "";
+    let guserScore = 0, gcpuScore = 0, results = "";
 
     //Get the result of the round
 
+    
     const btn = document.querySelectorAll('button');
     btn.forEach((button) => {
         
         button.addEventListener('click', function(e) {
-            console.log(results = playRound(e.target.id, computerPlay()));
-
-                    //Add +1 to a score, or nothing at all.
-            //If the player Lost
-            ( results.indexOf("lose") != -1 ) ? cpuScore++ :
-            //If the player won
-            ( results.indexOf("win") != -1  ) ? userScore++ :
-            //If it was a draw
-            null ;
+            console.log(`Scores - User: ${guserScore}, CPU: ${gcpuScore}`);
+            if(gcpuScore !== 2 && guserScore !== 2) {
+                console.log(results = playRound(e.target.id, computerPlay()));
+    
+                        //Add +1 to a score, or nothing at all.
+                //If the player Lost
+                ( results.indexOf("lose") != -1 ) ? gcpuScore++ :
+                //If the player won
+                ( results.indexOf("win") != -1  ) ? guserScore++ :
+                //If it was a draw
+                null ;
+            }
             
-            findWinner(userScore, cpuScore);
         });
 
+        if(gcpuScore == 2 || guserScore == 2)
+        findWinner(guserScore, gcpuScore);
+
     });
+
+
+
 
 }
 
