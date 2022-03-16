@@ -159,8 +159,17 @@ function findWinner(userScore, cpuScore){
 //Utilized by computerPlay() and playerChoice()
 const moves = ["rock", "paper", "scissors"];
 
+const btn = document.querySelectorAll('button');
+btn.forEach((button) => {
+    
+    button.addEventListener('click', function(e) {
+        console.log(e.target.id);
+        playRound(e.target.id, computerPlay());
+    });
+
+});
 
 
 
 
-game();
+//game();
