@@ -94,36 +94,27 @@ function game(){
 
     let userScore = 0, cpuScore = 0, results = "";
 
-    //for (let a = 0; a < 5; a++) { }
-
-
-
     //Get the result of the round
 
     const btn = document.querySelectorAll('button');
     btn.forEach((button) => {
         
         button.addEventListener('click', function(e) {
-            console.log(results = playRound(e.target.id, cpuChoice()));
+            console.log(results = playRound(e.target.id, computerPlay()));
+
+                    //Add +1 to a score, or nothing at all.
+            //If the player Lost
+            ( results.indexOf("lose") != -1 ) ? cpuScore++ :
+            //If the player won
+            ( results.indexOf("win") != -1  ) ? userScore++ :
+            //If it was a draw
+            null ;
+            
+            findWinner(userScore, cpuScore);
         });
 
     });
 
-    //Add +1 to a score, or nothing at all.
-    //If the player Lost
-    ( results.indexOf("lose") != -1 ) ? cpuScore++ :
-    //If the player won
-    ( results.indexOf("win") != -1  ) ? userScore++ :
-    //If it was a draw
-    null ;
-
-    
-    if(cpuScore === 5 || userScore === 5) 
-        findWinner(userScore, cpuScore);
-    else if (results != undefined) {
-        //Update the player to current scores.
-        console.log(` -- Current Score -- \nCPU: ${cpuScore}\nPlayer: ${userScore}`);
-    }   
 }
 
 
@@ -147,9 +138,37 @@ function findWinner(userScore, cpuScore){
 //Utilized by computerPlay() and playerChoice()
 const moves = ["rock", "paper", "scissors"];
 
-
-
-
-
-
 game();
+
+const results = document.querySelector(".results");
+const resultsTitle = document.createElement('h3');
+const userMove = document.createElement('p');
+const cpuMove = document.createElement('p');
+const userResults = document.createElement('div');
+
+const scoreTitle = document.createElement('h3');
+const userScore = document.createElement('p');
+const cpuScore = document.createElement('p');
+
+for (let a = 0; a < 5; a++) {
+
+    resultsTitle.textContent = " -- Results -- ";
+    userMove.textContent = `User Move: ${a}`;
+    cpuMove.textContent = `CPU Move: ${a}`;
+
+    results.appendChild(resultsTitle);
+    resultsTitle.appendChild(userMove);
+    resultsTitle.appendChild(cpuMove);
+
+
+    scoreTitle.textContent = " -- Score -- ";
+    userScore.textContent = `User Score: ${a}`;
+    cpuScore.textContent = `CPU Score: ${a}`;
+
+    results.appendChild(scoreTitle);
+    scoreTitle.appendChild(userScore);
+    scoreTitle.appendChild(cpuScore);
+    
+}
+
+
