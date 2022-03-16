@@ -87,56 +87,44 @@ function playRound(playerSelection, computerSelection){
     }   
 }
 
-/*
-Have the user select their move. 
-Compare it to the rest of the moves available to be sure
-it's a valid option.
-*/
-function playerChoice() {
-
-    // Loop until a valid choice is entered.
-    while(true) {
-        //Get input, convert to string, lowercase.
-        let userChoice = String( prompt("Rock, Paper, or Scissors?\n") ).toLowerCase();
-
-        //See if userChoice is a valid move[] choice.
-        if (moves.indexOf(userChoice) != -1) 
-            return userChoice;
-            
-        console.log("ERROR! Input either \"Rock,\" \"Paper,\" or \"Scissors.\"");    
-    }
-
-}
 
 
-/*
 // Play Rock-Paper-Scissors for 5 times before finding a winner. 
 function game(){
 
     let userScore = 0, cpuScore = 0, results = "";
 
-    for (let a = 0; a < 5; a++) {
-        let cpuChoice = computerPlay(), 
-            userChoice = playerChoice();
+    //for (let a = 0; a < 5; a++) { }
+
+
+
+    //Get the result of the round
+
+    const btn = document.querySelectorAll('button');
+    btn.forEach((button) => {
+        
+        button.addEventListener('click', function(e) {
+            console.log(results = playRound(e.target.id, cpuChoice()));
+        });
+
+    });
+
+    //Add +1 to a score, or nothing at all.
+    //If the player Lost
+    ( results.indexOf("lose") != -1 ) ? cpuScore++ :
+    //If the player won
+    ( results.indexOf("win") != -1  ) ? userScore++ :
+    //If it was a draw
+    null ;
+
     
-        //Get the result of the round
-        console.log(results = playRound(userChoice, cpuChoice));
-
-        //Add +1 to a score, or nothing at all.
-        //If the player Lost
-        ( results.indexOf("lose") != -1 ) ? cpuScore++ :
-        //If the player won
-        ( results.indexOf("win") != -1  ) ? userScore++ :
-        //If it was a draw
-        null ;
-
+    if(cpuScore === 5 || userScore === 5) 
+        findWinner(userScore, cpuScore);
+    else if (results != undefined) {
         //Update the player to current scores.
         console.log(` -- Current Score -- \nCPU: ${cpuScore}\nPlayer: ${userScore}`);
-    }
-
-    findWinner(userScore, cpuScore);
+    }   
 }
-*/
 
 
 //Print who won the game.
@@ -159,17 +147,9 @@ function findWinner(userScore, cpuScore){
 //Utilized by computerPlay() and playerChoice()
 const moves = ["rock", "paper", "scissors"];
 
-const btn = document.querySelectorAll('button');
-btn.forEach((button) => {
-    
-    button.addEventListener('click', function(e) {
-        console.log(e.target.id);
-        playRound(e.target.id, computerPlay());
-    });
-
-});
 
 
 
 
-//game();
+
+game();
