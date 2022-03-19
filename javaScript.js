@@ -55,6 +55,14 @@ function computerPlay(){
 //Play a single round of Rock-Paper-Scissors
 function playRound(playerSelection, computerSelection){
 
+    const cpuMove = document.querySelector('.cpuMove');
+    const playerMove = document.querySelector('.playerMove');
+    const moveResults = document.querySelector('.moveResults');
+
+    //cpuMove.textContent = `User Move: ${playerSelection}`;
+    //playerMove.textContent = `CPU Move: ${computerSelection}`;
+
+
     let msgSelections = 
         `CPU picked ${computerSelection},\nYou picked ${playerSelection}.`,
     
@@ -68,6 +76,7 @@ function playRound(playerSelection, computerSelection){
         msgDraw = "DRAW: You both have the same move.";
 
 
+    moveResults.textContent = msgSelections;
     console.log(msgSelections);
 
     // If both selections are the same
@@ -92,9 +101,12 @@ function playRound(playerSelection, computerSelection){
 // Play Rock-Paper-Scissors for 5 times before finding a winner. 
 function game(){
 
-    let guserScore = 0, gcpuScore = 0, results = "";
+    let guserScore = 0, gcpuScore = 0, endResults = "";
 
     //Get the result of the round
+
+    const userScore = document.querySelector('.userScore');
+    const cpuScore = document.querySelector('.cpuScore');
 
     
     const btn = document.querySelectorAll('button');
@@ -103,16 +115,20 @@ function game(){
         button.addEventListener('click', function(e) {
             console.log(`Scores - User: ${guserScore}, CPU: ${gcpuScore}`);
             if(gcpuScore !== 2 && guserScore !== 2) {
-                console.log(results = playRound(e.target.id, computerPlay()));
+                console.log(endResults = playRound(e.target.id, computerPlay()));
     
                         //Add +1 to a score, or nothing at all.
                 //If the player Lost
-                ( results.indexOf("lose") != -1 ) ? gcpuScore++ :
+                ( endResults.indexOf("lose") != -1 ) ? gcpuScore++ :
                 //If the player won
-                ( results.indexOf("win") != -1  ) ? guserScore++ :
+                ( endResults.indexOf("win") != -1  ) ? guserScore++ :
                 //If it was a draw
                 null ;
             }
+
+            userScore.textContent = `User Score: ${guserScore}`;
+            cpuScore.textContent = `CPU Score: ${gcpuScore}`;
+
             
         });
 
@@ -147,37 +163,50 @@ function findWinner(userScore, cpuScore){
 //Utilized by computerPlay() and playerChoice()
 const moves = ["rock", "paper", "scissors"];
 
-game();
+function gameDOMGeneration () {
+    const results = document.querySelector(".results");
+    const resultsTitle = document.createElement('h3');
+    const userMove = document.createElement('p');
+    const cpuMove = document.createElement('p');
+    const userResults = document.createElement('div');
 
-const results = document.querySelector(".results");
-const resultsTitle = document.createElement('h3');
-const userMove = document.createElement('p');
-const cpuMove = document.createElement('p');
-const userResults = document.createElement('div');
+    const scoreTitle = document.createElement('h3');
+    const userScore = document.createElement('p');
+    const cpuScore = document.createElement('p');
 
-const scoreTitle = document.createElement('h3');
-const userScore = document.createElement('p');
-const cpuScore = document.createElement('p');
+    userScore.classList.add('userScore');
+    cpuScore.classList.add('cpuScore');
+    cpuMove.classList.add('cpuMove');
+    userMove.classList.add('playerMove');
+    userResults.classList.add('moveResults');
 
-for (let a = 0; a < 5; a++) {
+
+
 
     resultsTitle.textContent = " -- Results -- ";
-    userMove.textContent = `User Move: ${a}`;
-    cpuMove.textContent = `CPU Move: ${a}`;
+    userMove.textContent = `User Move: ${"None"}`;
+    cpuMove.textContent = `CPU Move: ${"None"}`;
 
     results.appendChild(resultsTitle);
     resultsTitle.appendChild(userMove);
     resultsTitle.appendChild(cpuMove);
-
+    resultsTitle.appendChild(userResults);
 
     scoreTitle.textContent = " -- Score -- ";
-    userScore.textContent = `User Score: ${a}`;
-    cpuScore.textContent = `CPU Score: ${a}`;
-
-    results.appendChild(scoreTitle);
+    userScore.textContent = `User Score: 0`;
+    cpuScore.textContent = `CPU Score: 0`;
     scoreTitle.appendChild(userScore);
     scoreTitle.appendChild(cpuScore);
-    
+
+
+    results.appendChild(scoreTitle);
+
+    const roundResults = document.createElement('h4');
+    roundResults.classList.add('moves');
 }
+
+
+gameDOMGeneration();
+game();
 
 
