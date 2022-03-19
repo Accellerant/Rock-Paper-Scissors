@@ -109,34 +109,48 @@ function game(){
 
     
     const btn = document.querySelectorAll('button');
+
+
+
+
+
+
     btn.forEach((button) => {
-        
+    
+        // Will loop 3 times - adds click listeners to all three buttons
         button.addEventListener('click', function(e) {
-            if(gcpuScore !== 2 && guserScore !== 2) {
+            
+            // This function runs whenever there's a click!
+            if(gcpuScore !== 5 && guserScore !== 5) {
                 endResults = playRound(e.target.id, computerPlay());
     
-                        //Add +1 to a score, or nothing at all.
+                //Add +1 to a score, or nothing at all.
                 //If the player Lost
                 ( endResults.indexOf("lose") != -1 ) ? gcpuScore++ :
                 //If the player won
                 ( endResults.indexOf("win") != -1  ) ? guserScore++ :
                 //If it was a draw
                 null ;
-            }
 
-            userScore.textContent = `User Score: ${guserScore}`;
-            cpuScore.textContent = `CPU Score: ${gcpuScore}`;
+                userScore.textContent = `User Score: ${guserScore}`;
+                cpuScore.textContent = `CPU Score: ${gcpuScore}`;
 
+                console.log("inside the listener!");
+            } 
             
         });
 
-        if(gcpuScore == 2 || guserScore == 2)
-        findWinner(guserScore, gcpuScore);
-
+        console.log("inside eventListener");
     });
 
 
 
+
+
+    // Will only run once, incorporate into button clicks    
+    if (gcpuScore == 5 || guserScore == 5) {
+        findWinner(guserScore, gcpuScore);
+    }
 
 }
 
