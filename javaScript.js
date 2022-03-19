@@ -55,12 +55,9 @@ function computerPlay(){
 //Play a single round of Rock-Paper-Scissors
 function playRound(playerSelection, computerSelection){
 
-    const cpuMove = document.querySelector('.cpuMove');
-    const playerMove = document.querySelector('.playerMove');
     const movesChosen = document.querySelector('.movesChosen');
+    const gameResults = document.querySelector('.gameResults');
 
-    //cpuMove.textContent = `User Move: ${playerSelection}`;
-    //playerMove.textContent = `CPU Move: ${computerSelection}`;
 
 
     let msgSelections = 
@@ -81,6 +78,7 @@ function playRound(playerSelection, computerSelection){
 
     // If both selections are the same
     if (computerSelection === playerSelection) {
+        gameResults.textContent = msgDraw;
         return msgDraw;
 
     // If any of the win conditions for CPU are found, they win.
@@ -88,10 +86,12 @@ function playRound(playerSelection, computerSelection){
                 (computerSelection == 'paper' && playerSelection == 'rock') ||
                 (computerSelection == 'scissors' && playerSelection ==='paper')) {
 
+        gameResults.textContent = msgCpuWon;
         return msgCpuWon;
         
     // Otherwise, the player scored. 
     } else {
+        gameResults.textContent = msgPlayerWon;
         return msgPlayerWon;
     }   
 }
