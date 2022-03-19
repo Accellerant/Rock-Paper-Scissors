@@ -57,7 +57,7 @@ function playRound(playerSelection, computerSelection){
 
     const cpuMove = document.querySelector('.cpuMove');
     const playerMove = document.querySelector('.playerMove');
-    const moveResults = document.querySelector('.moveResults');
+    const movesChosen = document.querySelector('.movesChosen');
 
     //cpuMove.textContent = `User Move: ${playerSelection}`;
     //playerMove.textContent = `CPU Move: ${computerSelection}`;
@@ -76,7 +76,7 @@ function playRound(playerSelection, computerSelection){
         msgDraw = "DRAW: You both have the same move.";
 
 
-    moveResults.textContent = msgSelections;
+    movesChosen.textContent = msgSelections;
     console.log(msgSelections);
 
     // If both selections are the same
@@ -146,16 +146,20 @@ function game(){
 //Print who won the game.
 function findWinner(userScore, cpuScore){
 
+    const matchResults = document.querySelector('.gameResults');
+
     let msgUserWin = `You win!`,
         msgCpuWin = `You Lose.`,
         msgDraw = `DRAW - Nobody Won!`;
 
+    
+
     //If the player won
-    (userScore > cpuScore) ? console.log(msgUserWin) : 
+    (userScore > cpuScore) ? matchResults.textContent = msgUserWin : 
     //If the CPU won
-    (cpuScore > userScore) ? console.log(msgCpuWin) :
+    (cpuScore > userScore) ? matchResults.textContent = msgCpuWin :
     // Otherwise, it must be a draw.
-    console.log(msgDraw);
+    matchResults.textContent = msgDraw;
 
 }
 
@@ -164,42 +168,44 @@ function findWinner(userScore, cpuScore){
 const moves = ["rock", "paper", "scissors"];
 
 function gameDOMGeneration () {
-    const results = document.querySelector(".results");
-    const resultsTitle = document.createElement('h3');
-    const userMove = document.createElement('p');
-    const cpuMove = document.createElement('p');
-    const userResults = document.createElement('div');
 
+    
+    
+    const movesContainer = document.querySelector(".movesContainer");
+    const resultsTitle = document.createElement('h3');
+    const movesChosen = document.createElement('p');
+    const gameResults = document.createElement('p');
+
+    const scoresContainer = document.querySelector(".scoresContainer");
     const scoreTitle = document.createElement('h3');
     const userScore = document.createElement('p');
     const cpuScore = document.createElement('p');
 
     userScore.classList.add('userScore');
     cpuScore.classList.add('cpuScore');
-    cpuMove.classList.add('cpuMove');
-    userMove.classList.add('playerMove');
-    userResults.classList.add('moveResults');
+    movesChosen.classList.add('movesChosen');
+    gameResults.classList.add('gameResults');
 
 
 
 
     resultsTitle.textContent = " -- Results -- ";
-    userMove.textContent = `User Move: ${"None"}`;
-    cpuMove.textContent = `CPU Move: ${"None"}`;
+    movesChosen.textContent = "Awaiting for Round";
+    gameResults.textContent = "To Be Played."
+    movesContainer.appendChild(resultsTitle);
+    movesContainer.appendChild(movesChosen);
+    movesContainer.appendChild(gameResults);
 
-    results.appendChild(resultsTitle);
-    resultsTitle.appendChild(userMove);
-    resultsTitle.appendChild(cpuMove);
-    resultsTitle.appendChild(userResults);
 
     scoreTitle.textContent = " -- Score -- ";
     userScore.textContent = `User Score: 0`;
     cpuScore.textContent = `CPU Score: 0`;
-    scoreTitle.appendChild(userScore);
-    scoreTitle.appendChild(cpuScore);
+    scoresContainer.appendChild(scoreTitle);
+    scoresContainer.appendChild(userScore);
+    scoresContainer.appendChild(cpuScore);
 
 
-    results.appendChild(scoreTitle);
+    
 
     const roundResults = document.createElement('h4');
     roundResults.classList.add('moves');
