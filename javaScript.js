@@ -74,7 +74,6 @@ function playRound(playerSelection, computerSelection){
 
 
     movesChosen.textContent = msgSelections;
-    console.log(msgSelections);
 
     // If both selections are the same
     if (computerSelection === playerSelection) {
@@ -113,9 +112,8 @@ function game(){
     btn.forEach((button) => {
         
         button.addEventListener('click', function(e) {
-            console.log(`Scores - User: ${guserScore}, CPU: ${gcpuScore}`);
             if(gcpuScore !== 2 && guserScore !== 2) {
-                console.log(endResults = playRound(e.target.id, computerPlay()));
+                endResults = playRound(e.target.id, computerPlay());
     
                         //Add +1 to a score, or nothing at all.
                 //If the player Lost
