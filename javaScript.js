@@ -137,20 +137,13 @@ function game(){
 
                 console.log("inside the listener!");
             } 
+
+            findWinner(guserScore, gcpuScore);
             
         });
 
         console.log("inside eventListener");
     });
-
-
-
-
-
-    // Will only run once, incorporate into button clicks    
-    if (gcpuScore == 5 || guserScore == 5) {
-        findWinner(guserScore, gcpuScore);
-    }
 
 }
 
@@ -158,26 +151,33 @@ function game(){
 //Print who won the game.
 function findWinner(userScore, cpuScore){
 
-    const matchResults = document.querySelector('.gameResults');
+    const gameStatus = document.querySelector('.gameStatus');
 
-    let msgUserWin = `You win!`,
-        msgCpuWin = `You Lose.`,
-        msgDraw = `DRAW - Nobody Won!`;
+    let msgUserWin = `You win, The Computer Loses!`,
+        msgCpuWin = `You Lose, The Computer Won.`,
+        msgDraw = `DRAW - Nobody Won!`,
+        msgCpuWinning = "The Computer is In The Lead",
+        msgPlayerWinning = "You're In The Lead!", 
+        msgNeitherWinning = "You're both tied currently",
+        msgPlayAgain = "Refresh the Page to Play Again!";
 
     
 
-    //If the player won
-    (userScore > cpuScore) ? matchResults.textContent = msgUserWin : 
-    //If the CPU won
-    (cpuScore > userScore) ? matchResults.textContent = msgCpuWin :
+    
+    (userScore === 5 && cpuScore !== 5) ? gameStatus.textContent = msgUserWin :
+    
+    (cpuScore === 5 && userScore !== 5) ? gameStatus.textContent = msgCpuWin :
+
+    (cpuScore === 5 && userScore === 5) ? gameStatus.textContent = msgDraw :
+    //If the player is winning
+    (userScore > cpuScore) ? gameStatus.textContent = msgPlayerWinning : 
+    //If the CPU is winning
+    (cpuScore > userScore) ? gameStatus.textContent = msgCpuWinning :
     // Otherwise, it must be a draw.
-    matchResults.textContent = msgDraw;
+    gameStatus.textContent = msgNeitherWinning;
 
 }
 
-//Main Program
-//Utilized by computerPlay() and playerChoice()
-const moves = ["rock", "paper", "scissors"];
 
 function gameDOMGeneration () {
 
@@ -221,7 +221,24 @@ function gameDOMGeneration () {
 
     const roundResults = document.createElement('h4');
     roundResults.classList.add('moves');
+
+    const gameStatusContainer = document.querySelector('.gameStatusContainer');
+
+    const gameStatus = document.createElement('div');
+    gameStatus.classList.add('gameStatus');
+    gameStatus.textContent = "New Game";
+    
+    gameStatusContainer.appendChild(gameStatus);
+
+    const body = document.querySelector('body');
+    body.setAttribute('style', 'display:flex; justify-content: center; flex-direction: column; align-items: center; text-align: center;');
 }
+
+//Main Program
+//Utilized by computerPlay() and playerChoice()
+const moves = ["rock", "paper", "scissors"];
+
+
 
 
 gameDOMGeneration();
