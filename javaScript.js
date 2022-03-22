@@ -52,13 +52,13 @@ function computerPlay(){
     return moves[ Math.floor(Math.random() * 3) ];
 }
 
-//Play a single round of Rock-Paper-Scissors
+
+/*
+Play a single round of Rock-Paper-Scissors.
+Find out if the player or CPU won and return a string
+to be evaluated for key words: win, lose, draw.
+*/
 function playRound(playerSelection, computerSelection){
-
-    const movesChosen = document.querySelector('.movesChosen');
-    const gameResults = document.querySelector('.gameResults');
-
-
 
     let msgSelections = 
         `CPU picked ${computerSelection},\nYou picked ${playerSelection}.`,
@@ -72,12 +72,11 @@ function playRound(playerSelection, computerSelection){
         // MUST have "DRAW" for game()
         msgDraw = "DRAW: You both have the same move.";
 
-
+    const movesChosen = document.querySelector('.movesChosen');
     movesChosen.textContent = msgSelections;
 
     // If both selections are the same
     if (computerSelection === playerSelection) {
-        gameResults.textContent = msgDraw;
         return msgDraw;
 
     // If any of the win conditions for CPU are found, they win.
@@ -85,121 +84,91 @@ function playRound(playerSelection, computerSelection){
                 (computerSelection == 'paper' && playerSelection == 'rock') ||
                 (computerSelection == 'scissors' && playerSelection ==='paper')) {
 
-        gameResults.textContent = msgCpuWon;
         return msgCpuWon;
         
     // Otherwise, the player scored. 
     } else {
-        gameResults.textContent = msgPlayerWon;
         return msgPlayerWon;
     }   
 }
 
 
-
-// Play Rock-Paper-Scissors for 5 times before finding a winner. 
+// Play Rock-Paper-Scissors until someone reaches a score of 5.
 function game(){
-
-    let guserScore = 0, gcpuScore = 0, endResults = "";
-
-    //Get the result of the round
-
-    const userScore = document.querySelector('.userScore');
-    const cpuScore = document.querySelector('.cpuScore');
-
-    
+    let userScore = 0, cpuScore = 0, endResults = "";
+    const userDocScore = document.querySelector('.userScore');
+    const cpuDocScore = document.querySelector('.cpuScore');
     const btn = document.querySelectorAll('button');
-
-
-
-
-
+    const gameResults = document.querySelector('.gameResults');
+    
 
     btn.forEach((button) => {
     
-        // Will loop 3 times - adds click listeners to all three buttons
-        button.addEventListener('click', function(e) {
-            
+        button.addEventListener('click', (e) => {
             // This function runs whenever there's a click!
-            if(gcpuScore !== 5 && guserScore !== 5) {
-                endResults = playRound(e.target.id, computerPlay());
+            // Each button has an id which is passed to playRound
+            if(cpuScore !== 5 && userScore !== 5) {
+
+                gameResults.textContent = endResults = 
+                    playRound(e.target.id, computerPlay());
     
                 //Add +1 to a score, or nothing at all.
                 //If the player Lost
-                ( endResults.indexOf("lose") != -1 ) ? gcpuScore++ :
+                ( endResults.indexOf("lose") != -1 ) ? cpuScore++ :
                 //If the player won
-                ( endResults.indexOf("win") != -1  ) ? guserScore++ :
+                ( endResults.indexOf("win") != -1  ) ? userScore++ :
                 //If it was a draw
                 null ;
 
-                userScore.textContent = `User Score: ${guserScore}`;
-                cpuScore.textContent = `CPU Score: ${gcpuScore}`;
-
-                console.log("inside the listener!");
+                userDocScore.textContent = `User Score: ${userScore}`;
+                cpuDocScore.textContent = `CPU Score: ${cpuScore}`;
             } 
 
-            findWinner(guserScore, gcpuScore);
-            
+            findWinner(userScore, cpuScore);
         });
 
-        console.log("inside eventListener");
     });
-
 }
 
 
-//Print who won the game.
+// Display who's leading and who wins when a score of 5 is reached.
 function findWinner(userScore, cpuScore){
 
     const gameStatus = document.querySelector('.gameStatus');
 
     let msgUserWin = `You win, The Computer Loses!`,
         msgCpuWin = `You Lose, The Computer Won.`,
-        msgDraw = `DRAW - Nobody Won!`,
         msgCpuWinning = "The Computer is In The Lead",
         msgPlayerWinning = "You're In The Lead!", 
-        msgNeitherWinning = "You're both tied currently",
-        msgPlayAgain = "Refresh the Page to Play Again!";
-
+        msgNeitherWinning = "You're both tied currently";
     
-
-    
-    (userScore === 5 && cpuScore !== 5) ? gameStatus.textContent = msgUserWin :
-    
+    (userScore === 5 && cpuScore !== 5) ? gameStatus.textContent = msgUserWin :  
     (cpuScore === 5 && userScore !== 5) ? gameStatus.textContent = msgCpuWin :
-
-    (cpuScore === 5 && userScore === 5) ? gameStatus.textContent = msgDraw :
-    //If the player is winning
+    //If the player is winning.
     (userScore > cpuScore) ? gameStatus.textContent = msgPlayerWinning : 
-    //If the CPU is winning
+    //If the CPU is winning.
     (cpuScore > userScore) ? gameStatus.textContent = msgCpuWinning :
-    // Otherwise, it must be a draw.
+    // Otherwise, currently a draw.
     gameStatus.textContent = msgNeitherWinning;
-
 }
 
-
+/*
+Target and create DOM elements for body which displays
+what's happening in the game. 
+*/
 function gameDOMGeneration () {
+    const body = document.querySelector('body');
+    body.setAttribute(
+        'style', 'display:flex; justify-content: center; flex-direction: column; align-items: center; text-align: center;');
 
-    
-    
+
     const movesContainer = document.querySelector(".movesContainer");
     const resultsTitle = document.createElement('h3');
     const movesChosen = document.createElement('p');
     const gameResults = document.createElement('p');
 
-    const scoresContainer = document.querySelector(".scoresContainer");
-    const scoreTitle = document.createElement('h3');
-    const userScore = document.createElement('p');
-    const cpuScore = document.createElement('p');
-
-    userScore.classList.add('userScore');
-    cpuScore.classList.add('cpuScore');
     movesChosen.classList.add('movesChosen');
     gameResults.classList.add('gameResults');
-
-
-
 
     resultsTitle.textContent = " -- Results -- ";
     movesChosen.textContent = "Awaiting for Round";
@@ -209,6 +178,15 @@ function gameDOMGeneration () {
     movesContainer.appendChild(gameResults);
 
 
+
+    const scoresContainer = document.querySelector(".scoresContainer");
+    const scoreTitle = document.createElement('h3');
+    const userScore = document.createElement('p');
+    const cpuScore = document.createElement('p');
+
+    userScore.classList.add('userScore');
+    cpuScore.classList.add('cpuScore');
+
     scoreTitle.textContent = " -- Score -- ";
     userScore.textContent = `User Score: 0`;
     cpuScore.textContent = `CPU Score: 0`;
@@ -217,31 +195,18 @@ function gameDOMGeneration () {
     scoresContainer.appendChild(cpuScore);
 
 
-    
-
-    const roundResults = document.createElement('h4');
-    roundResults.classList.add('moves');
-
     const gameStatusContainer = document.querySelector('.gameStatusContainer');
-
     const gameStatus = document.createElement('div');
+
     gameStatus.classList.add('gameStatus');
     gameStatus.textContent = "New Game";
     
     gameStatusContainer.appendChild(gameStatus);
 
-    const body = document.querySelector('body');
-    body.setAttribute('style', 'display:flex; justify-content: center; flex-direction: column; align-items: center; text-align: center;');
 }
 
 //Main Program
-//Utilized by computerPlay() and playerChoice()
 const moves = ["rock", "paper", "scissors"];
-
-
-
 
 gameDOMGeneration();
 game();
-
-
